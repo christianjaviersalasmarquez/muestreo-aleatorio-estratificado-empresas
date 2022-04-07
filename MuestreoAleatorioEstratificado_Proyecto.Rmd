@@ -23,7 +23,7 @@ output:
 
 
 ```{r}
-library(readxl)
+if(!require(readxl)) install.packages("readxl", repos = "http://cran.us.r-project.org")
 datos_empresas <- read_excel("C:/Users/Computer/Documents/Ingenieria Estadistica II PAO 2021/Muestreo/ProyectoFinal_Muestreo/Datasets Muestreo/Supercias/marco_muestral_empresas_IRcausado.xlsx")
 #View(datos_empresas)
 ```
@@ -202,9 +202,9 @@ n1 + n2 + n3 + n4
 Selección de una muestra de cada estrato utilizando los tamaños de muestra calculados.
 
 ```{r}
-library(sampling)
-library(SamplingStrata)
-library(splitstackshape)
+if(!require(sampling)) install.packages("sampling", repos = "http://cran.us.r-project.org")
+if(!require(SamplingStrata)) install.packages("SamplingStrata", repos = "http://cran.us.r-project.org")
+if(!require(splitstackshape)) install.packages("splitstackshape", repos = "http://cran.us.r-project.org")
 ```
 
 ```{r}
@@ -235,7 +235,7 @@ muestra_estratificada_stratified
 
 
 ```{r}
-library(writexl)
+if(!require(writexl)) install.packages("writexl", repos = "http://cran.us.r-project.org")
 
 #write_xlsx(muestra_estratificada_stratified,"C:\\Users\\Computer\\Documents\\Ingenieria Estadistica II PAO 2021\\Muestreo\\ProyectoFinal_Muestreo\\muestra_aleatoria_estratificada.xlsx")
 ```
@@ -312,7 +312,8 @@ for (i in 1:R) {
 
 
 ```{r}
-library(highcharter)
+if(!require(highcharter)) install.packages("highcharter", repos = "http://cran.us.r-project.org")
+
 hc_muestreo_1 <- hchart(hist(xbarra_muestras))
 hc_muestreo_2 <- hchart(xbarra_muestras)
 hc_muestreo_1
@@ -336,7 +337,8 @@ hc_muestreo_4
 
 
 ```{r}
-library(plotly)
+if(!require(plotly)) install.packages("plotly", repos = "http://cran.us.r-project.org")
+
 fig_muestreo_1 <- plot_ly(x = ~datos_MAE$IRcausado2021, type = "histogram")
 
 fig_muestreo_1
@@ -379,7 +381,6 @@ table(datos_MAE$TipoCompanía)
 
 
 ```{r}
-library(highcharter)
 A <- c("Sociedad Anonima", "Responsabilidad Limitada", "Sucursal Extranjera", "SAS", "Asociacion o Consorcio" , "Economia Mixta")
 C <- c("Sociedad Anonima", "Responsabilidad Limitada", "Sucursal Extranjera", "SAS", "Asociacion o Consorcio" , "Economia Mixta")
 B <- c(296, 132, 7, 3, 2, 1)
@@ -416,19 +417,6 @@ hc_muestreo_piechart
 
 
 
-```{r}
-#D <- c("Anonima", "Jupiter", "Venus", "Saturn")
-#df <- data.frame(A, B, C, D)
-#txt <- paste("C:",C," <br>D:", D)
-
-#highchart() %>% 
-#  hc_chart(type="pie", data=df) %>% 
-#  myhc_add_series_labels_values(labels=A, values=B, text=txt) %>% 
-#  hc_tooltip(crosshairs=TRUE, borderWidth=5, sort=TRUE, shared=TRUE, table=TRUE,
-#          pointFormat=paste('<br><b>A: {point.percentage:.1f}%</b><br>{point.text}')) %>%
-#  hc_title(text = "ABC", margin = 20, style = list(color = "#144746", useHTML = TRUE)) 
-```
-
 
 Analisis de Correspondencia Multiple
 
@@ -460,12 +448,11 @@ rangoir_supercias <- as.factor(datos_MAE$RangoIR)
 
 
 ```{r}
-library(ca)
-library(FactoMineR)
-library(factoextra)
-library(descr)
-library(highcharter)
-library(stringr)
+if(!require(ca)) install.packages("ca", repos = "http://cran.us.r-project.org")
+if(!require(FactoMineR)) install.packages("FactoMineR", repos = "http://cran.us.r-project.org")
+if(!require(factoextra)) install.packages("factoextra", repos = "http://cran.us.r-project.org")
+if(!require(descr)) install.packages("descr", repos = "http://cran.us.r-project.org")
+if(!require(stringr)) install.packages("stringr", repos = "http://cran.us.r-project.org")
 ```
 
 
@@ -609,7 +596,6 @@ Serie de tiempo
 
 
 ```{r}
-library(readxl)
 ranking2015 <- read_excel("C:/Users/Computer/Documents/Ingenieria Estadistica II PAO 2021/Muestreo/ProyectoFinal_Muestreo/Datasets Muestreo/Supercias 2015 a 2019/ranking2015.xlsx",skip = 1)
 ranking2016 <- read_excel("C:/Users/Computer/Documents/Ingenieria Estadistica II PAO 2021/Muestreo/ProyectoFinal_Muestreo/Datasets Muestreo/Supercias 2015 a 2019/ranking2016.xlsx",skip = 1)
 ranking2017 <- read_excel("C:/Users/Computer/Documents/Ingenieria Estadistica II PAO 2021/Muestreo/ProyectoFinal_Muestreo/Datasets Muestreo/Supercias 2015 a 2019/ranking2017.xlsx",skip = 1)

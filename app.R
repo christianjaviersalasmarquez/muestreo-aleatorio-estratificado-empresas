@@ -1,16 +1,16 @@
-library(shiny)
-library(shinydashboard)
-library(highcharter)
-library(shinydashboardPlus)
-library(haven)
-library(e1071)
-library(modeest)
-library(bs4Dash)
-library(plotrix)
+if(!require(shiny)) install.packages("shiny", repos = "http://cran.us.r-project.org")
+if(!require(shinydashboard)) install.packages("shinydashboard", repos = "http://cran.us.r-project.org")
+if(!require(shinydashboardPlus)) install.packages("shinydashboardPlus", repos = "http://cran.us.r-project.org")
+if(!require(highcharter)) install.packages("highcharter", repos = "http://cran.us.r-project.org")
+if(!require(haven)) install.packages("haven", repos = "http://cran.us.r-project.org")
+if(!require(e1071)) install.packages("e1071", repos = "http://cran.us.r-project.org")
+if(!require(modeest)) install.packages("modeest", repos = "http://cran.us.r-project.org")
+if(!require(bs4Dash)) install.packages("bs4Dash", repos = "http://cran.us.r-project.org")
+if(!require(plotrix)) install.packages("plotrix", repos = "http://cran.us.r-project.org")
+if(!require(DT)) install.packages("DT", repos = "http://cran.us.r-project.org")
 
-library(DT)
 
-##### TEXTOS
+##### Texto
 
 titulo_principal <- h1(style="font-family:Open Sans","Muestreo Aleatorio Estratificado")
 
@@ -34,7 +34,7 @@ titulo_info_dataset <- h2(style="font-family:Open Sans","Informacion del Conjunt
 
 texto_info_ts <- p(style="font-family:Open Sans","Estimacion de la media del IR Causado 2021: 137739.1 USD")
 
-##### OBJETOS
+##### Header, Sidebar, Body
 
 
 header <- dashboardHeader(title="Muestreo")
@@ -51,11 +51,7 @@ sidebar <- dashboardSidebar(status = "primary",
                               menuItem("Estadistica Multivariante", tabName = "menuitem_EM",
                                        menuSubItem("ACM Empresas", tabName = "subitem_mca"),
                                        menuSubItem("PCA Supercias", tabName = "subitem_pca")),
-                              menuItem("Serie de Tiempo", tabName = "item_ts")
-
-                            )
-                            
-)
+                              menuItem("Serie de Tiempo", tabName = "item_ts")))
 
 
 body <- dashboardBody(
@@ -88,8 +84,6 @@ body <- dashboardBody(
                       ))
               
             )),
-
-
     tabItem(tabName = "data1" , fluidRow(column(DT::dataTableOutput("datos_MAE"),width = 12))),
     
     tabItem(tabName = "subitem_mca", 
@@ -105,44 +99,30 @@ body <- dashboardBody(
                       column(width = 4,box(title = "Estimacion de la media poblacional 1000 muestras", highchartOutput("hc_muestreo_2"),width = 12))),
             column(width = 6,box(title = "Impuesto a la Renta Causado 2021", highchartOutput("hc_muestreo_4"),width = 12))
             ),
-
-
-
     tabItem(tabName = "item_ts",
             column(width = 6,box(title = "Evolucion de la media del Impuesto a la Renta Causado", highchartOutput("hc_timeseries2"),width = 12)),
-            column(width = 6,box(title = "Informacion", texto_info_ts,width = 12)))
-  ))
+            column(width = 6,box(title = "Informacion", texto_info_ts,width = 12)))))
 
 
 ui <- dashboardPage(title= "Dashboard", skin= "black",
                     
                     header = header,
                     sidebar = sidebar,
-                    body = body
-)
+                    body = body)
 
 
 
 
 
-# Define server logic required to draw a histogram
+# Server
 server <- function(input, output) {
   output$datos_MAE <- renderDataTable(datos_MAE)
-
-  
-
-  
-  
   output$bi1_plot <- renderUI({
     tags$img(src = "http://localhost/imagenesdashboardshiny/imagen1")
   })
-  
   output$bi2_plot <- renderUI({
     tags$img(src = "http://localhost/imagenesdashboardshiny/imagen2")
   })
-  
-  
-  
   output$hc_muestreo_1 <- renderHighchart(hc_muestreo_1)
   output$hc_muestreo_2 <- renderHighchart(hc_muestreo_2)
   output$hc_muestreo_3 <- renderHighchart(hc_muestreo_3)
@@ -152,21 +132,6 @@ server <- function(input, output) {
   output$hc_muestreo_PCA <- renderHighchart(hc_muestreo_PCA)
   output$hc_muestreo_piechart <- renderHighchart(hc_muestreo_piechart)
   output$hc_timeseries2 <- renderHighchart(hc_timeseries2)
-
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
 }
 
 # Run the application 
